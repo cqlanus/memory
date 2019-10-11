@@ -4,16 +4,18 @@ import VEGGIES_MAP from '../data/veggies'
 
 
 const ImageContainer = styled.div`
-    height: 90px;
-    width: 90px;
+    height: 80px;
+    width: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
 `
+
 const Image = ({ value }: { value: string}) => {
+    const src = VEGGIES_MAP[value] || VEGGIES_MAP.default
     return (
         <ImageContainer>
-            <img src={VEGGIES_MAP[value]} alt=""/>
+            <img src={src} alt=""/>
         </ImageContainer>
     )
 }

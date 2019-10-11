@@ -19,7 +19,6 @@ const Container = styled.div`
     padding: 1em;
     border-radius: 5px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-    flex-basis: 100px;
     height: 100px;
     margin: 0.5em;
     display: flex;
@@ -30,10 +29,6 @@ const Container = styled.div`
     transform: ${({isSelected}: ContainerProps) => isSelected ? 'rotateY(180deg)': 'rotateY(0deg)'};
     transition: 0.6s;
 	transform-style: preserve-3d;
-
-    @media (min-width: 500px) {
-        flex-basis: calc(25% - 10px);
-    }
 
     :hover {
         box-shadow: 2px 2px 2px rgba(140, 0, 0, 0.5);
