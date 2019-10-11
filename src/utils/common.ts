@@ -17,8 +17,8 @@ const createCardValue = (val: number) => {
     }
 }
 
-export const createInitialValues = () => {
-    const array = Array.from({ length: 24 }, (val: number, idx: number) => idx)
+export const createInitialValues = (length = 24) => {
+    const array = Array.from({length }, (val: number, idx: number) => idx)
     const shuffled = shuffleArray(array).map(createCardValue)
     return shuffled
 }

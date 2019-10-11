@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Card from './Card'
+import Victory from './Victory'
 import { CardValue } from '../types/card'
 import { createInitialValues } from '../utils/common'
 
@@ -23,8 +24,14 @@ const GameBoard = () => {
 
     const [first, setFirst] = useState()
     const [second, setSecond] = useState()
+    const [hasWon, setWon] = useState()
 
-    const hasWon = values.every(({ isMatched }) => isMatched)
+    const hasUserWon = () => {
+        setTimeout(() => {
+            const value = values.every(({ isMatched }) => isMatched)
+            setWon(value)
+        }, 1000)
+    }
 
     const clearSelected = () => {
         setSecond(undefined)
@@ -68,11 +75,18 @@ const GameBoard = () => {
         }
     }
 
+    const reset = () => {
+        clearSelected()
+        setValues(createInitialValues())
+    }
+
+    hasUserWon()
+    
     return (
         <Container>
             <Title>Memory Game</Title>
             {hasWon ? (
-                <h1>You Win</h1>
+                <Victory reset={reset} />
             ) : (
                 <CardContainer>
                     {values.map(c => (
