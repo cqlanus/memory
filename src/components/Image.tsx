@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import ICON_MAP from '../data/iconSet'
-
 
 const ImageContainer = styled.div`
     height: 80px;
@@ -17,7 +15,6 @@ interface Props {
 }
 
 const Image = ({ value, iconSet }: Props) => {
-    // const set = ICON_MAP[iconSet]
     const src = iconSet[value] || iconSet.default
     return (
         <ImageContainer>

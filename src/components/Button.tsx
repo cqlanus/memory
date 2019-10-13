@@ -1,4 +1,4 @@
-import React from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 
 interface Props {
@@ -7,6 +7,8 @@ interface Props {
     negative?: boolean
     fluid?: boolean
     floated?: 'right' | 'left'
+    icon?: string
+    children: ReactNode
 }
 
 
@@ -19,22 +21,24 @@ const Button = styled.button`
         ? '#db2828' 
         : 'lightgrey'};
     color: ${({primary, positive, negative}: Props) => (primary || positive || negative) ? 'white' : 'rgba(0,0,0,.6)'};
-    padding: .7em 2em;
+    padding:  ${({children}: Props) => typeof children === "string" ? '.7em 2em' : '.25em' };
     border: none;
     margin-right: .25em;
     margin-bottom: .25em;
     font-size: 1em;
     font-weight: bold;
-    float: ${({floated}: Props) => {
+    float: ${({floated, children}: Props) => {
         if (floated) {
             return floated === 'right' ? 'right' : 'left'
         } else {
             return 'none'
         }
     }};
-    border-radius: 5px;
+    /* border-radius: 5px; */
+    border-radius:  ${({children}: Props) => typeof children === "string" ? '5px' : '50%' };
     width: ${({fluid}: Props) => fluid ? '100%' : 'inherit'};
     text-align: center;
+    cursor: pointer;
 
     :hover {
         background: ${({primary, positive, negative}: Props) => primary 

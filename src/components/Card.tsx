@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
-import Image from './Image'
 import { CardValue } from '../types/card'
 
 interface Props {
@@ -35,7 +34,8 @@ const Container = styled.div`
 
     transform: ${({isSelected}: ContainerProps) => isSelected ? 'rotateY(180deg)': 'rotateY(0deg)'};
     transition: 0.6s;
-	transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    cursor: pointer;
 
     :hover {
         box-shadow: 2px 2px 2px rgba(140, 0, 0, 0.5);

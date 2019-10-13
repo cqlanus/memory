@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Modal from './Modal'
+import Icon from './Icon'
 import Button, { ButtonGroup } from './Button'
 import ICON_MAP from '../data/iconSet'
 
@@ -18,7 +19,6 @@ const SettingsContainer = styled.div`
         font-weight: bold;
         margin-top: .25em;
     }
-    
 `
 
 interface Props {
@@ -47,9 +47,15 @@ const Settings = ({ reset, setIcons, setTheme }: Props) => {
         setTheme(theme)
         closeModal()
     }
+
+    const renderTrigger = () => (
+        <Button floated="right" onClick={openModal} >
+            <Icon name="settings" />
+        </Button>
+    )
     
     return (
-        <Modal onClose={closeModal} trigger={<Button floated="right" onClick={openModal} >Trigger</Button>} open={isOpen} title={"Settings"}>
+        <Modal onClose={closeModal} trigger={renderTrigger()} open={isOpen} title={"Settings"}>
             <SettingsContainer>
                 <Button onClick={handleReset()} negative>Restart Game</Button>
 
