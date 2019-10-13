@@ -38,6 +38,11 @@ const CardContainer = styled.div`
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: repeat(4, 1fr);
     }
+
+    @media (min-width: 1000px) {
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
 `
 
 
@@ -109,7 +114,7 @@ const GameBoard = () => {
     
     return (
         <Container theme={theme} >
-            <Settings setTheme={setTheme} setIcons={setIcons} reset={reset} />
+            <Settings theme={theme} setTheme={setTheme} setIcons={setIcons} reset={reset} />
             <Title>Memory Game</Title>
             
             {hasWon ? (

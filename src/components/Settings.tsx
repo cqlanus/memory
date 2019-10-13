@@ -25,9 +25,10 @@ interface Props {
     reset: (cardQty?: number) => void
     setIcons: (iconSet: any) => void
     setTheme: (theme: any) => void
+    theme: 'light' | 'dark'
 }
 
-const Settings = ({ reset, setIcons, setTheme }: Props) => {
+const Settings = ({ reset, setIcons, setTheme, theme }: Props) => {
 
     const [ isOpen, setOpen ] = useState(false)
     const openModal = () =>  setOpen(true)
@@ -55,7 +56,7 @@ const Settings = ({ reset, setIcons, setTheme }: Props) => {
     )
     
     return (
-        <Modal onClose={closeModal} trigger={renderTrigger()} open={isOpen} title={"Settings"}>
+        <Modal theme={theme} onClose={closeModal} trigger={renderTrigger()} open={isOpen} title={"Settings"}>
             <SettingsContainer>
                 <Button onClick={handleReset()} negative>Restart Game</Button>
 

@@ -7,9 +7,11 @@ interface Props {
     onClose: () => void,
     children: ReactNode,
     trigger: ReactNode,
+    theme: 'light' | 'dark'
 }
 interface ModalContainerProps {
-    open: boolean,
+    open: boolean
+    theme: 'light' | 'dark'
 }
 const ModalContainer = styled.div`
     display: ${({open}: ModalContainerProps) => open ? 'flex' : 'none'};
@@ -27,7 +29,8 @@ const ModalContainer = styled.div`
 const ModalContent = styled.div`
     flex-basis: 90%;
     min-height: 50vh;
-    background-color: white;
+    background-color: ${({theme}: any) => theme === 'dark' ? 'none' : 'white'};
+    color: ${({theme}: any) => theme === 'dark' ? 'white' : 'inherit'};
     padding: 1em;
 
     @media (min-width: 700px) {
@@ -40,13 +43,13 @@ const ModalTitle = styled.h3`
     text-align: center;
 `
 
-const Modal = ({open, title, children, trigger, onClose}: Props) => {
+const Modal = ({open, title, children, trigger, onClose, theme}: Props) => {
     
     return (
         <div>
         {trigger}
         <ModalContainer onClick={onClose} open={open}>
-            <ModalContent onClick={(e: React.MouseEvent) => e.stopPropagation()} >
+            <ModalContent theme={theme} onClick={(e: React.MouseEvent) => e.stopPropagation()} >
                 {title && <ModalTitle>{title}</ModalTitle>}
                 {children}
             </ModalContent>
