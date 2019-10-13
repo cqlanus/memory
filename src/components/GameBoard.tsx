@@ -2,11 +2,21 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Card from './Card'
 import Victory from './Victory'
+import Settings from './Settings'
+import Image from './Image'
 import { CardValue } from '../types/card'
 import { createInitialValues } from '../utils/common'
+import ICON_MAP from '../data/iconSet'
 
+
+interface ContainerProps {
+    theme: 'light' | 'dark'
+}
 const Container = styled.div`
     padding: 1em;
+    background-color: ${({theme}: ContainerProps) => theme === 'light' ? 'white' : 'rgba(0,0,0,0.6)' };
+    color: ${({theme}: ContainerProps) => theme === 'light' ? 'black' : 'white' };
+    min-height: 100vh;
 `
 
 const Title = styled.h2`
@@ -37,6 +47,9 @@ const GameBoard = () => {
     const [first, setFirst] = useState()
     const [second, setSecond] = useState()
     const [hasWon, setWon] = useState()
+    const [ iconSet, setIcons ] = useState(ICON_MAP.FOOD)
+    const initialTheme: 'dark' | 'light' = 'dark'
+    const [ theme, setTheme ] = useState(initialTheme)
 
     const hasUserWon = () => {
         setTimeout(() => {
@@ -87,31 +100,36 @@ const GameBoard = () => {
         }
     }
 
-    const reset = () => {
+    const reset = (cardQty: number = 24) => {
         clearSelected()
-        setValues(createInitialValues())
+        setValues(createInitialValues(cardQty))
     }
 
     hasUserWon()
     
     return (
-        <Container>
+        <Container theme={theme} >
+            <Settings setTheme={setTheme} setIcons={setIcons} reset={reset} />
             <Title>Memory Game</Title>
+            
             {hasWon ? (
                 <Victory reset={reset} />
             ) : (
                 <CardContainer>
                     {values.map(c => (
                         <Card
+                            theme={theme}
                             first={first}
                             second={second}
                             key={c.id}
                             card={c}
                             handleClick={handleClick}
+                            image={<Image iconSet={iconSet} value={c.value} />}
                         />
                     ))}
                 </CardContainer>
             )}
+            
         </Container>
     )
 }

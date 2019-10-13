@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import VEGGIES_MAP from '../data/veggies'
+import ICON_MAP from '../data/iconSet'
 
 
 const ImageContainer = styled.div`
@@ -11,8 +11,14 @@ const ImageContainer = styled.div`
     align-items: center;
 `
 
-const Image = ({ value }: { value: string}) => {
-    const src = VEGGIES_MAP[value] || VEGGIES_MAP.default
+interface Props {
+    iconSet: any
+    value: string
+}
+
+const Image = ({ value, iconSet }: Props) => {
+    // const set = ICON_MAP[iconSet]
+    const src = iconSet[value] || iconSet.default
     return (
         <ImageContainer>
             <img src={src} alt=""/>
