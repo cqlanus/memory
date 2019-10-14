@@ -55,17 +55,17 @@ const Settings = ({ reset, setIcons, setTheme, theme }: Props) => {
                 <Button onClick={handleReset()} negative>Restart Game</Button>
 
                 <label>Difficulty</label>
-                <ButtonGroup fluid primary>
-                    <Button onClick={handleReset(DIFFICULTY_MAP.EASY)} >Easy</Button>
-                    <Button onClick={handleReset(DIFFICULTY_MAP.MEDIUM)} >Medium</Button>
-                    <Button onClick={handleReset(DIFFICULTY_MAP.HARD)} >Hard</Button>
+                <ButtonGroup fluid>
+                    <Button primary onClick={handleReset(DIFFICULTY_MAP.EASY)} >Easy</Button>
+                    <Button primary onClick={handleReset(DIFFICULTY_MAP.MEDIUM)} >Medium</Button>
+                    <Button primary onClick={handleReset(DIFFICULTY_MAP.HARD)} >Hard</Button>
                 </ButtonGroup>
 
                 <label>Card Theme</label>
-                <ButtonGroup positive fluid>
-                    <Button onClick={handleIcons(ICON_MAP.FOOD)} >Foods</Button>
-                    <Button onClick={handleIcons(ICON_MAP.FLAGS)} >Flags</Button>
-                    <Button onClick={handleIcons(ICON_MAP.ANIMALS)} >Animals</Button>
+                <ButtonGroup fluid>
+                    <Button positive onClick={handleIcons(ICON_MAP.FOOD)} >Foods</Button>
+                    <Button positive onClick={handleIcons(ICON_MAP.FLAGS)} >Flags</Button>
+                    <Button positive onClick={handleIcons(ICON_MAP.ANIMALS)} >Animals</Button>
                 </ButtonGroup>
 
                 <label>UI Theme</label>

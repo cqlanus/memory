@@ -22,3 +22,10 @@ export const createInitialValues = (length = 24) => {
     const shuffled = shuffleArray(array).map(createCardValue)
     return shuffled
 }
+
+type ScoreEntry = [ string, string ]
+export const sortEntriesByClicks = (entryA: ScoreEntry, entryB: ScoreEntry) => {
+    const [ keyA, clicksA ] = entryA
+    const [ keyB, clicksB ] = entryB
+    return (+clicksA) - (+clicksB)
+}

@@ -8,6 +8,7 @@ import { getStorage } from '../utils/storage'
 import { format } from 'date-fns'
 import DIFFICULTY_MAP from '../data/difficulty'
 import { getDifficulty } from '../utils/difficulty'
+import { sortEntriesByClicks } from '../utils/common'
 
 interface Props {
     theme: 'light' | 'dark'
@@ -40,7 +41,6 @@ const Leaderboard = ({theme, hasWon}: Props) => {
 
     useEffect(() => {
         const storage = getStorage('clickCount')
-        console.log({storage})
         setScores(storage)
     }, [hasWon])
     
@@ -56,7 +56,8 @@ const Leaderboard = ({theme, hasWon}: Props) => {
 
     const difficulty = getDifficulty(difficultyNum)
     type ScoreEntry = [ string, string ]
-    const scoresForDifficulty: ScoreEntry[] = Object.entries(allScores ? allScores[difficulty] : {})
+    const scores: { [key: string]: string } = allScores ? allScores[difficulty] : {}
+    const scoresForDifficulty: ScoreEntry[] = Object.entries(scores).sort(sortEntriesByClicks).slice(0,5)
 
     const isDifficultyActive = (diffNum: number) => diffNum === difficultyNum
     

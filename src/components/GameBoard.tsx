@@ -50,7 +50,7 @@ const CardContainer = styled.div`
 
 
 const GameBoard = () => {
-    const [values, setValues] = useState(createInitialValues(4))
+    const [values, setValues] = useState(createInitialValues())
 
     const [first, setFirst] = useState()
     const [second, setSecond] = useState()
@@ -117,13 +117,9 @@ const GameBoard = () => {
     }
 
     const reset = (cardQty: number = DIFFICULTY_MAP.MEDIUM) => {
-        console.log({here: 1})
         clearSelected()
         setValues(createInitialValues(cardQty))
         setClicks(0)
-
-        console.log({values})
-        console.log({clicks})
     }
 
     hasUserWon()

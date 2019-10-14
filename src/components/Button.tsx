@@ -13,9 +13,8 @@ interface Props {
 }
 
 const getBackgroundColor = (p: Props) => {
-    const { active, fluid, primary } = p
-    if (active) {
-        const color = primary 
+    if (p.active) {
+        const color = p.primary 
         ? '#1678c2' 
         : p.positive 
         ? '#16ab39' 
