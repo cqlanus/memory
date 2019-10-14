@@ -1,14 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
-const Button = styled.button`
-    background: teal;
-    color: white;
-    padding: .7em 2em;
-    border: 1px solid teal;
-    font-size: 1em;
-    border-radius: 5px;
-`
+import Button from './Button'
 
 const Container = styled.div`
     display: flex;
@@ -22,10 +14,13 @@ interface Props {
 }
 
 const Victory = ({reset}: Props) => {
+
+    const handleReset = () => reset()
+    
     return (
         <Container>
             <h2>You Win!</h2>
-            <Button onClick={reset}>Play Again</Button>
+            <Button primary onClick={handleReset}>Play Again</Button>
         </Container>
     )
 }

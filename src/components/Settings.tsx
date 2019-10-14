@@ -1,15 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Modal from './Modal'
 import Icon from './Icon'
 import Button, { ButtonGroup } from './Button'
 import ICON_MAP from '../data/iconSet'
-
-const DIFFICULTY_MAP = {
-    EASY: 12,
-    MEDIUM: 24,
-    HARD: 36
-}
+import { useModal } from '../utils/modal'
+import DIFFICULTY_MAP from '../data/difficulty'
 
 const SettingsContainer = styled.div`
     display: flex;
@@ -30,9 +26,7 @@ interface Props {
 
 const Settings = ({ reset, setIcons, setTheme, theme }: Props) => {
 
-    const [ isOpen, setOpen ] = useState(false)
-    const openModal = () =>  setOpen(true)
-    const closeModal = () =>  setOpen(false)
+    const { isOpen, closeModal, openModal } = useModal()
     
     const handleReset = (cardQty?: number) => () => {
         reset(cardQty)

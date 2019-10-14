@@ -3,10 +3,13 @@ import styled from 'styled-components'
 import Card from './Card'
 import Victory from './Victory'
 import Settings from './Settings'
+import Leaderboard from './Leaderboard'
 import Image from './Image'
 import { CardValue } from '../types/card'
 import { createInitialValues } from '../utils/common'
 import ICON_MAP from '../data/iconSet'
+import { handleVictory } from '../utils/victory'
+import DIFFICULTY_MAP from '../data/difficulty'
 
 
 interface ContainerProps {
@@ -47,7 +50,7 @@ const CardContainer = styled.div`
 
 
 const GameBoard = () => {
-    const [values, setValues] = useState(createInitialValues())
+    const [values, setValues] = useState(createInitialValues(4))
 
     const [first, setFirst] = useState()
     const [second, setSecond] = useState()
@@ -55,12 +58,18 @@ const GameBoard = () => {
     const [ iconSet, setIcons ] = useState(ICON_MAP.FOOD)
     const initialTheme: 'dark' | 'light' = 'dark'
     const [ theme, setTheme ] = useState(initialTheme)
+    const [ clicks, setClicks ] = useState(0)
+
+    const incrementClick = () => setClicks(clicks + 1)
 
     const hasUserWon = () => {
         setTimeout(() => {
             const value = values.every(({ isMatched }) => isMatched)
+            if (value) {
+                handleVictory(clicks, values.length)
+            }
             setWon(value)
-        }, 1000)
+        }, hasWon ? 0 : 1000)
     }
 
     const clearSelected = () => {
@@ -93,6 +102,8 @@ const GameBoard = () => {
             return
         }
 
+        incrementClick()
+
         if (!first) {
             setFirst(card)
         } else if (first.id === card.id) {
@@ -105,9 +116,14 @@ const GameBoard = () => {
         }
     }
 
-    const reset = (cardQty: number = 24) => {
+    const reset = (cardQty: number = DIFFICULTY_MAP.MEDIUM) => {
+        console.log({here: 1})
         clearSelected()
         setValues(createInitialValues(cardQty))
+        setClicks(0)
+
+        console.log({values})
+        console.log({clicks})
     }
 
     hasUserWon()
@@ -115,6 +131,7 @@ const GameBoard = () => {
     return (
         <Container theme={theme} >
             <Settings theme={theme} setTheme={setTheme} setIcons={setIcons} reset={reset} />
+            <Leaderboard hasWon={hasWon} theme={theme} />
             <Title>Memory Game</Title>
             
             {hasWon ? (

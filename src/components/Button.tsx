@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 interface Props {
     primary?: boolean
+    active?: boolean
     positive?: boolean
     negative?: boolean
     fluid?: boolean
@@ -11,17 +12,33 @@ interface Props {
     children: ReactNode
 }
 
+const getBackgroundColor = (p: Props) => {
+    const { active, fluid, primary } = p
+    if (active) {
+        const color = primary 
+        ? '#1678c2' 
+        : p.positive 
+        ? '#16ab39' 
+        : p.negative 
+        ? '#d01919' 
+        : 'rgba(0,0,0,0.4)'
+
+        return color
+    } else {
+        return p.primary 
+        ? 'rgb(33, 133, 208)' 
+        : p.positive 
+        ? '#21ba45' 
+        : p.negative 
+        ? '#db2828' 
+        : 'lightgrey'
+    }
+}
 
 const Button = styled.button`
-    background: ${({primary, positive, negative}: Props) => primary 
-        ? 'rgb(33, 133, 208)' 
-        : positive 
-        ? '#21ba45' 
-        : negative 
-        ? '#db2828' 
-        : 'lightgrey'};
-    color: ${({primary, positive, negative}: Props) => (primary || positive || negative) ? 'white' : 'rgba(0,0,0,.6)'};
-    padding:  ${({children}: Props) => typeof children === "string" ? '.7em 2em' : '.25em' };
+    background: ${getBackgroundColor};
+    color: ${({primary, positive, negative, active}: Props) => (primary || positive || negative || active) ? 'white' : 'rgba(0,0,0,.6)'};
+    padding:  ${({children}: Props) => typeof children === "string" ? '.7em 2em' : '.5em' };
     border: none;
     margin-right: .25em;
     margin-bottom: .25em;
@@ -49,6 +66,9 @@ const Button = styled.button`
             ? '#d01919' 
             : '#cacbcd'};
     }
+
+    
+
 `
 
 export const ButtonGroup = styled.div`
@@ -58,24 +78,6 @@ export const ButtonGroup = styled.div`
     ${Button} {
         border-radius: 0;
         margin-right: 0;
-        background: ${({primary, positive, negative}: Props) => primary 
-        ? 'rgb(33, 133, 208)' 
-        : positive 
-        ? '#21ba45' 
-        : negative 
-        ? '#db2828' 
-        : 'lightgrey'};
-        color: ${({primary, positive}: Props) => (primary || positive) ? 'white' : 'rgba(0,0,0,.6)'};
-
-        :hover {
-        background: ${({primary, positive, negative}: Props) => primary 
-            ? '#1678c2' 
-            : positive 
-            ? '#16ab39' 
-            : negative 
-            ? '#d01919' 
-            : '#cacbcd'};
-    }
     }
 
     ${Button}:first-child {

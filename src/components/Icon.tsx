@@ -12,6 +12,8 @@ const Container = styled.div`
 
 const Img = styled.img`
     flex: 1;
+    height: inherit;
+    width: inherit;
 `
 
 interface Props {
